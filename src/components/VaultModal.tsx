@@ -6,6 +6,8 @@ import {
   FolderSync,
   Globe,
   HardDrive,
+  KeyRound,
+  Lock,
   RefreshCw,
   Sparkles,
   Unplug,
@@ -22,6 +24,9 @@ interface VaultModalProps {
   isSyncingVault: boolean;
   storagePersisted: boolean | null;
   hasSampleData: boolean;
+  username: string | null;
+  onLockWorkspace: () => void;
+  onChangeCredentials: () => void;
   onConnectVaultFolder: () => void;
   onSyncVaultNow: () => void;
   onLoadFromVaultFolder: () => void;
@@ -41,6 +46,9 @@ export function VaultModal({
   isSyncingVault,
   storagePersisted,
   hasSampleData,
+  username,
+  onLockWorkspace,
+  onChangeCredentials,
   onConnectVaultFolder,
   onSyncVaultNow,
   onLoadFromVaultFolder,
@@ -235,7 +243,43 @@ export function VaultModal({
             )}
           </div>
 
-          {/* 4. GitHub Pages + Cloudflare Custom Domain Checklist */}
+          {/* 4. Passcode & Security */}
+          <div className="pt-5 border-t border-slate-200 space-y-3">
+            <div className="flex items-center justify-between gap-2">
+              <h4 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
+                <Lock className="w-4 h-4 text-slate-600" />
+                <span>Passcode &amp; Access Protection</span>
+              </h4>
+              {username && (
+                <span className="text-xs font-medium text-slate-500">
+                  Signed in as: <strong className="text-slate-800 font-semibold">{username}</strong>
+                </span>
+              )}
+            </div>
+            <p className="text-xs text-slate-600 leading-relaxed">
+              Your personal tasks, strategic goals, and Second Brain notes are protected by a client-side SHA-256 master passcode so anyone accessing this URL must authenticate.
+            </p>
+            <div className="flex flex-wrap items-center gap-2 pt-1">
+              <button
+                type="button"
+                onClick={onLockWorkspace}
+                className="min-h-[44px] px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+              >
+                <Lock className="w-3.5 h-3.5" />
+                <span>Lock Workspace Now</span>
+              </button>
+              <button
+                type="button"
+                onClick={onChangeCredentials}
+                className="min-h-[44px] px-4 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 text-xs font-medium inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+              >
+                <KeyRound className="w-3.5 h-3.5" />
+                <span>Change Passcode</span>
+              </button>
+            </div>
+          </div>
+
+          {/* 5. GitHub Pages + Cloudflare Custom Domain Checklist */}
           <div className="pt-5 border-t border-slate-200 space-y-2.5">
             <h4 className="text-sm font-semibold text-slate-900 flex items-center gap-2">
               <Globe className="w-4 h-4 text-slate-600" />

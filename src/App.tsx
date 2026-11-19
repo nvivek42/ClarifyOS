@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FileText } from 'lucide-react';
+import { FileText, Lock } from 'lucide-react';
+import { AuthLockScreen } from './components/AuthLockScreen';
 import { ConfirmModal } from './components/ConfirmModal';
 import { ExperimentModal } from './components/ExperimentModal';
 import { ExperimentsView } from './components/ExperimentsView';
@@ -9,6 +10,12 @@ import { MatrixView } from './components/MatrixView';
 import { TaskModal } from './components/TaskModal';
 import { VaultModal } from './components/VaultModal';
 import { formatTimestamp, generateId } from './data/seedData';
+import {
+  disableAuth,
+  getStoredAuth,
+  isSessionUnlocked,
+  lockSession,
+} from './storage/auth';
 import {
   FSDirectoryHandle,
   loadStateFromDirectoryVault,
@@ -48,6 +55,10 @@ interface ConfirmState {
 }
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => isSessionUnlocked());
+  const [authUsername, setAuthUsername] = useState<string | null>(
+    () => getStoredAuth()?.username || null
+  );
   const [state, setState] = useState<AppState>(() => loadInitialStateSync());
   const [storageReady, setStorageReady] = useState<boolean>(() => hasLocalStorageKey());
   const [storagePersisted, setStoragePersisted] = useState<boolean | null>(null);
@@ -599,12 +610,48 @@ export default function App() {
     });
   };
 
+  const handleLockWorkspace = () => {
+    lockSession();
+    setIsAuthenticated(false);
+    setVaultModalOpen(false);
+    notify('Workspace locked.', 'info');
+  };
+
+  const handleChangeCredentials = () => {
+    setConfirmState({
+      isOpen: true,
+      title: 'Change Credentials?',
+      message:
+        'This will lock the workspace and allow you to configure a new username and password.',
+      confirmLabel: 'Reset & Change',
+      destructive: false,
+      onConfirm: () => {
+        disableAuth();
+        setAuthUsername(null);
+        setIsAuthenticated(false);
+        setVaultModalOpen(false);
+        setConfirmState((prev) => ({ ...prev, isOpen: false }));
+      },
+    });
+  };
+
   const activeLTGoal = editingLTGoalId
     ? state.longTermGoals.find((g) => g.id === editingLTGoalId) || null
     : null;
   const activeExp = editingExpId
     ? state.shortTermExperiments.find((e) => e.id === editingExpId) || null
     : null;
+
+  if (!isAuthenticated) {
+    return (
+      <AuthLockScreen
+        onAuthenticated={(user) => {
+          setAuthUsername(user);
+          setIsAuthenticated(true);
+        }}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
@@ -671,15 +718,26 @@ export default function App() {
             </button>
           </nav>
 
-          {/* Zone 3: Single Second Brain (.md) & Backup action */}
-          <button
-            type="button"
-            onClick={() => setVaultModalOpen(true)}
-            className="min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-800 inline-flex items-center gap-2 transition-colors whitespace-nowrap shrink-0"
-          >
-            <FileText className="w-3.5 h-3.5 text-indigo-600" />
-            <span>{connectedFolderName ? `Vault: ${connectedFolderName}` : 'Second Brain (.md)'}</span>
-          </button>
+          {/* Zone 3: Second Brain (.md) & Lock Workspace */}
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              onClick={() => setVaultModalOpen(true)}
+              className="min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-800 inline-flex items-center gap-2 transition-colors whitespace-nowrap shrink-0"
+            >
+              <FileText className="w-3.5 h-3.5 text-indigo-600" />
+              <span>{connectedFolderName ? `Vault: ${connectedFolderName}` : 'Second Brain (.md)'}</span>
+            </button>
+            <button
+              type="button"
+              onClick={handleLockWorkspace}
+              title="Lock Workspace"
+              aria-label="Lock Workspace"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition-colors shrink-0"
+            >
+              <Lock className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
 
         <input
@@ -836,6 +894,9 @@ export default function App() {
         isSyncingVault={isSyncingVault}
         storagePersisted={storagePersisted}
         hasSampleData={hasSampleData}
+        username={authUsername}
+        onLockWorkspace={handleLockWorkspace}
+        onChangeCredentials={handleChangeCredentials}
         onConnectVaultFolder={handleConnectVaultFolder}
         onSyncVaultNow={handleSyncVaultNow}
         onLoadFromVaultFolder={handleLoadFromVaultFolder}
