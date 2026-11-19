@@ -1,0 +1,8 @@
+{
+  "firestore": {
+    "databaseId": "ai-studio-clarityos-b997c58a-b0f5-4cef-ac23-1d7bbc55a118",
+    "rules": "firestore.rules",
+    "edition": "ENTERPRISE",
+    "dataAccessMode": "FIRESTORE_NATIVE"
+  }
+}
