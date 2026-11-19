@@ -654,15 +654,15 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-zinc-900">
       {/* Strict 3-Zone Top Bar */}
-      <header className="sticky top-0 z-30 bg-white/95 backdrop-blur-sm border-b border-slate-200">
+      <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-md border-b border-zinc-200/80">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4 md:gap-8">
           {/* Zone 1: Single-element brand wordmark */}
           <button
             type="button"
             onClick={() => setActiveTab('matrix')}
-            className="font-display text-lg font-bold tracking-tight text-slate-900 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 rounded"
+            className="font-display text-lg font-bold tracking-tight text-zinc-900 whitespace-nowrap shrink-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 rounded"
           >
             ClarityOS
           </button>
@@ -677,12 +677,12 @@ export default function App() {
               onClick={() => setActiveTab('matrix')}
               className={`min-h-[44px] px-1 border-b-2 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2 ${
                 activeTab === 'matrix'
-                  ? 'border-slate-900 text-slate-900 font-semibold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  ? 'border-zinc-900 text-zinc-900 font-semibold'
+                  : 'border-transparent text-zinc-500 hover:text-zinc-900'
               }`}
             >
               <span>Matrix</span>
-              <span className="font-mono tabular-nums text-xs text-slate-400">
+              <span className="font-mono tabular-nums text-xs text-zinc-400">
                 {activeTasksCount}
               </span>
             </button>
@@ -692,12 +692,12 @@ export default function App() {
               onClick={() => setActiveTab('long-term')}
               className={`min-h-[44px] px-1 border-b-2 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2 ${
                 activeTab === 'long-term'
-                  ? 'border-slate-900 text-slate-900 font-semibold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  ? 'border-zinc-900 text-zinc-900 font-semibold'
+                  : 'border-transparent text-zinc-500 hover:text-zinc-900'
               }`}
             >
               <span>Long-Term Goals</span>
-              <span className="font-mono tabular-nums text-xs text-slate-400">
+              <span className="font-mono tabular-nums text-xs text-zinc-400">
                 {state.longTermGoals.length}
               </span>
             </button>
@@ -707,12 +707,12 @@ export default function App() {
               onClick={() => setActiveTab('experiments')}
               className={`min-h-[44px] px-1 border-b-2 transition-colors whitespace-nowrap shrink-0 flex items-center gap-2 ${
                 activeTab === 'experiments'
-                  ? 'border-slate-900 text-slate-900 font-semibold'
-                  : 'border-transparent text-slate-500 hover:text-slate-900'
+                  ? 'border-zinc-900 text-zinc-900 font-semibold'
+                  : 'border-transparent text-zinc-500 hover:text-zinc-900'
               }`}
             >
               <span>Experiments</span>
-              <span className="font-mono tabular-nums text-xs text-slate-400">
+              <span className="font-mono tabular-nums text-xs text-zinc-400">
                 {state.shortTermExperiments.length}
               </span>
             </button>
@@ -723,7 +723,7 @@ export default function App() {
             <button
               type="button"
               onClick={() => setVaultModalOpen(true)}
-              className="min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-slate-800 inline-flex items-center gap-2 transition-colors whitespace-nowrap shrink-0"
+              className="min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 bg-white hover:bg-zinc-50 text-xs font-semibold text-zinc-800 inline-flex items-center gap-2 transition-colors whitespace-nowrap shrink-0 shadow-2xs"
             >
               <FileText className="w-3.5 h-3.5 text-indigo-600" />
               <span>{connectedFolderName ? `Vault: ${connectedFolderName}` : 'Second Brain (.md)'}</span>
@@ -733,7 +733,7 @@ export default function App() {
               onClick={handleLockWorkspace}
               title="Lock Workspace"
               aria-label="Lock Workspace"
-              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 hover:text-slate-900 transition-colors shrink-0"
+              className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl border border-zinc-200 bg-white hover:bg-zinc-50 text-zinc-600 hover:text-zinc-900 transition-colors shrink-0 shadow-2xs"
             >
               <Lock className="w-3.5 h-3.5" />
             </button>
@@ -761,17 +761,17 @@ export default function App() {
         {/* Mobile Workspace Navigation */}
         <nav
           aria-label="Mobile Workspace Navigation"
-          className="md:hidden grid grid-cols-3 gap-1 p-1 bg-slate-200/70 rounded-xl"
+          className="md:hidden grid grid-cols-3 gap-1 p-1 bg-zinc-200/60 rounded-xl"
         >
           <button
             type="button"
             onClick={() => setActiveTab('matrix')}
             className={`min-h-[44px] px-2 py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${
-              activeTab === 'matrix' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600'
+              activeTab === 'matrix' ? 'bg-white text-zinc-900 shadow-xs font-semibold' : 'text-zinc-600'
             }`}
           >
             <span>Matrix</span>
-            <span className="font-mono tabular-nums text-[11px] text-slate-400">
+            <span className="font-mono tabular-nums text-[11px] text-zinc-400">
               {activeTasksCount}
             </span>
           </button>
@@ -779,11 +779,11 @@ export default function App() {
             type="button"
             onClick={() => setActiveTab('long-term')}
             className={`min-h-[44px] px-2 py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${
-              activeTab === 'long-term' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600'
+              activeTab === 'long-term' ? 'bg-white text-zinc-900 shadow-xs font-semibold' : 'text-zinc-600'
             }`}
           >
             <span>Goals</span>
-            <span className="font-mono tabular-nums text-[11px] text-slate-400">
+            <span className="font-mono tabular-nums text-[11px] text-zinc-400">
               {state.longTermGoals.length}
             </span>
           </button>
@@ -791,11 +791,11 @@ export default function App() {
             type="button"
             onClick={() => setActiveTab('experiments')}
             className={`min-h-[44px] px-2 py-2 rounded-lg text-xs font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap ${
-              activeTab === 'experiments' ? 'bg-white text-slate-900 shadow-xs font-semibold' : 'text-slate-600'
+              activeTab === 'experiments' ? 'bg-white text-zinc-900 shadow-xs font-semibold' : 'text-zinc-600'
             }`}
           >
             <span>Experiments</span>
-            <span className="font-mono tabular-nums text-[11px] text-slate-400">
+            <span className="font-mono tabular-nums text-[11px] text-zinc-400">
               {state.shortTermExperiments.length}
             </span>
           </button>
@@ -803,14 +803,14 @@ export default function App() {
 
         {/* Subtle Sample Data Notice */}
         {hasSampleData && (
-          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-amber-50/70 border border-amber-200/80 text-xs text-amber-900">
+          <div className="flex flex-wrap items-center justify-between gap-2 px-4 py-2.5 rounded-xl bg-amber-50/70 border border-amber-200/70 text-xs text-amber-950">
             <span>
               Pre-populated with sample workspace data so you can explore the workflow immediately.
             </span>
             <button
               type="button"
               onClick={handleClearSampleData}
-              className="min-h-[36px] px-3 py-1 rounded-lg bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 font-semibold transition-colors whitespace-nowrap shrink-0"
+              className="min-h-[36px] px-3 py-1 rounded-lg bg-white border border-amber-300 hover:bg-amber-100 text-amber-950 font-semibold transition-colors whitespace-nowrap shrink-0 shadow-2xs"
             >
               Clear Sample Data
             </button>

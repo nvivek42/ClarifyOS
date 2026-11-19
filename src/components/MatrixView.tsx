@@ -30,39 +30,39 @@ const QUADRANTS: Array<{
   title: string;
   subtitle: string;
   topAccentClass: string;
-  countClass: string;
+  badgeClass: string;
 }> = [
   {
     id: 'do',
     shortTitle: 'Do First',
     title: '1. Do First',
-    subtitle: 'Urgent & Important — Critical commitments and deadlines',
-    topAccentClass: 'border-t-2 border-t-rose-600',
-    countClass: 'text-rose-700',
+    subtitle: 'Urgent & Important — Deadlines & critical commitments',
+    topAccentClass: 'border-t-2 border-t-rose-500',
+    badgeClass: 'text-rose-700 bg-rose-50/70 border border-rose-200/60',
   },
   {
     id: 'schedule',
     shortTitle: 'Schedule',
     title: '2. Schedule',
-    subtitle: 'Not Urgent & Important — Strategy, deep work, and long-term goals',
-    topAccentClass: 'border-t-2 border-t-indigo-600',
-    countClass: 'text-indigo-700',
+    subtitle: 'Not Urgent & Important — Strategy & deep work focus',
+    topAccentClass: 'border-t-2 border-t-indigo-500',
+    badgeClass: 'text-indigo-700 bg-indigo-50/70 border border-indigo-200/60',
   },
   {
     id: 'delegate',
     shortTitle: 'Delegate',
     title: '3. Delegate',
-    subtitle: 'Urgent & Not Important — Interruptions, admin, and handoffs',
-    topAccentClass: 'border-t-2 border-t-amber-600',
-    countClass: 'text-amber-700',
+    subtitle: 'Urgent & Not Important — Handoffs, interruptions & admin',
+    topAccentClass: 'border-t-2 border-t-amber-500',
+    badgeClass: 'text-amber-800 bg-amber-50/70 border border-amber-200/60',
   },
   {
     id: 'eliminate',
     shortTitle: 'Eliminate',
     title: '4. Eliminate',
-    subtitle: 'Not Urgent & Not Important — Distractions and low-value busywork',
-    topAccentClass: 'border-t-2 border-t-slate-400',
-    countClass: 'text-slate-600',
+    subtitle: 'Not Urgent & Not Important — Distractions & low-value noise',
+    topAccentClass: 'border-t-2 border-t-zinc-400',
+    badgeClass: 'text-zinc-700 bg-zinc-100/70 border border-zinc-200/60',
   },
 ];
 
@@ -107,9 +107,9 @@ export function MatrixView({
   };
 
   return (
-    <section className="space-y-5" aria-label="Eisenhower Matrix">
+    <section className="space-y-4" aria-label="Eisenhower Matrix">
       {/* Quick Add & Filter Toolbar */}
-      <div className="bg-white rounded-xl border border-slate-200 p-4 space-y-3.5">
+      <div className="bg-white rounded-2xl border border-zinc-200/80 p-4 shadow-xs space-y-3.5">
         <form onSubmit={handleQuickSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-2.5">
           <div className="lg:col-span-5">
             <label htmlFor="quick-task-title" className="sr-only">
@@ -122,7 +122,7 @@ export function MatrixView({
               value={quickTitle}
               onChange={(e) => setQuickTitle(e.target.value)}
               placeholder="Add a tactical task (e.g., Draft Q4 outreach email)..."
-              className="w-full min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+              className="w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 bg-zinc-50/60 focus:bg-white text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
             />
           </div>
 
@@ -135,7 +135,7 @@ export function MatrixView({
                 id="quick-task-quadrant"
                 value={quickQuadrant}
                 onChange={(e) => setQuickQuadrant(e.target.value as QuadrantId)}
-                className="w-full min-h-[44px] px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+                className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-zinc-200 bg-zinc-50/60 focus:bg-white text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
               >
                 <option value="do">1. Do First (Urgent &amp; Important)</option>
                 <option value="schedule">2. Schedule (Important, Not Urgent)</option>
@@ -152,7 +152,7 @@ export function MatrixView({
                 id="quick-task-goal"
                 value={quickGoalId}
                 onChange={(e) => setQuickGoalId(e.target.value)}
-                className="w-full min-h-[44px] px-3 py-2 rounded-lg border border-slate-200 bg-slate-50 focus:bg-white text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+                className="w-full min-h-[44px] px-3 py-2 rounded-xl border border-zinc-200 bg-zinc-50/60 focus:bg-white text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
               >
                 <option value="">No Linked Goal</option>
                 {longTermGoals.length > 0 && (
@@ -180,7 +180,7 @@ export function MatrixView({
           <div className="lg:col-span-2">
             <button
               type="submit"
-              className="w-full min-h-[44px] px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-sm font-medium flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap shrink-0"
+              className="w-full min-h-[44px] px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap shrink-0 shadow-xs"
             >
               <Plus className="w-4 h-4" />
               <span>Add Task</span>
@@ -189,17 +189,17 @@ export function MatrixView({
         </form>
 
         {/* Filter & Display Bar */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-100">
+        <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-zinc-100">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-500">
-              <Filter className="w-3.5 h-3.5" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-600">
+              <Filter className="w-3.5 h-3.5 text-zinc-500" />
               <span>Goal Filter</span>
             </span>
             <select
               aria-label="Filter tasks by goal"
               value={goalFilter}
               onChange={(e) => setGoalFilter(e.target.value)}
-              className="min-h-[40px] px-2.5 py-1.5 rounded-lg border border-slate-200 bg-white text-xs font-medium text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+              className="min-h-[38px] px-2.5 py-1.5 rounded-lg border border-zinc-200 bg-white text-xs font-medium text-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900/10"
             >
               <option value="all">All Tasks</option>
               <option value="unlinked">Unlinked Tasks Only</option>
@@ -225,12 +225,12 @@ export function MatrixView({
           </div>
 
           <div className="flex items-center gap-3">
-            <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-medium text-slate-600 select-none min-h-[40px]">
+            <label className="inline-flex items-center gap-2 cursor-pointer text-xs font-medium text-zinc-700 select-none min-h-[38px]">
               <input
                 type="checkbox"
                 checked={showCompleted}
                 onChange={(e) => setShowCompleted(e.target.checked)}
-                className="w-4 h-4 rounded border-slate-300 text-slate-900 focus:ring-slate-900"
+                className="w-4 h-4 rounded border-zinc-300 text-zinc-900 focus:ring-zinc-900"
               />
               <span>Show Completed</span>
             </label>
@@ -239,7 +239,7 @@ export function MatrixView({
               <button
                 type="button"
                 onClick={onClearCompleted}
-                className="min-h-[40px] px-3 py-1.5 rounded-lg text-xs font-medium text-slate-600 hover:text-rose-600 hover:bg-rose-50 border border-slate-200 transition-colors whitespace-nowrap shrink-0"
+                className="min-h-[38px] px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-600 hover:text-rose-600 hover:bg-rose-50 border border-zinc-200 transition-colors whitespace-nowrap shrink-0"
               >
                 Clear Completed ({completedTotal})
               </button>
@@ -259,10 +259,10 @@ export function MatrixView({
           role="tab"
           aria-selected={mobileQuadrant === 'all'}
           onClick={() => setMobileQuadrant('all')}
-          className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 border transition-colors ${
+          className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 border transition-colors ${
             mobileQuadrant === 'all'
-              ? 'bg-slate-900 text-white border-slate-900'
-              : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+              ? 'bg-zinc-900 text-white border-zinc-900'
+              : 'bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50'
           }`}
         >
           All
@@ -274,10 +274,10 @@ export function MatrixView({
             role="tab"
             aria-selected={mobileQuadrant === q.id}
             onClick={() => setMobileQuadrant(q.id)}
-            className={`min-h-[44px] px-3.5 py-2 rounded-lg text-xs font-semibold whitespace-nowrap shrink-0 border transition-colors ${
+            className={`min-h-[44px] px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 border transition-colors ${
               mobileQuadrant === q.id
-                ? 'bg-slate-900 text-white border-slate-900'
-                : 'bg-white text-slate-600 border-slate-200 hover:bg-slate-50'
+                ? 'bg-zinc-900 text-white border-zinc-900'
+                : 'bg-white text-zinc-600 border-zinc-200 hover:bg-zinc-50'
             }`}
           >
             {q.shortTitle}
@@ -330,17 +330,17 @@ export function MatrixView({
               }}
               className={`${
                 isHiddenOnMobile ? 'hidden md:flex' : 'flex'
-              } flex-col bg-white rounded-xl border border-slate-200 ${quad.topAccentClass} min-h-[290px] transition-colors ${
-                isDragOver ? 'bg-indigo-50/40 ring-2 ring-indigo-500/40' : ''
+              } flex-col bg-white rounded-2xl border border-zinc-200/80 ${quad.topAccentClass} min-h-[300px] shadow-xs transition-colors ${
+                isDragOver ? 'bg-indigo-50/40 ring-2 ring-indigo-500/30' : ''
               }`}
             >
               {/* Quadrant Header */}
-              <div className="px-4 py-3.5 border-b border-slate-100 flex items-start justify-between gap-3">
+              <div className="px-4 py-3.5 border-b border-zinc-100 flex items-start justify-between gap-3">
                 <div>
-                  <h2 className="text-sm font-semibold text-slate-900">{quad.title}</h2>
-                  <p className="text-xs text-slate-500 mt-0.5">{quad.subtitle}</p>
+                  <h2 className="text-sm font-bold text-zinc-900 tracking-tight">{quad.title}</h2>
+                  <p className="text-xs text-zinc-500 mt-0.5 leading-normal">{quad.subtitle}</p>
                 </div>
-                <span className={`text-xs font-mono tabular-nums font-semibold shrink-0 pt-0.5 ${quad.countClass}`}>
+                <span className={`text-[11px] font-mono tabular-nums font-semibold px-2 py-0.5 rounded-md shrink-0 ${quad.badgeClass}`}>
                   {activeCount} active
                 </span>
               </div>
@@ -348,12 +348,12 @@ export function MatrixView({
               {/* Task List */}
               <div className="p-3.5 flex-1 flex flex-col">
                 {qTasks.length === 0 ? (
-                  <div className="flex-1 min-h-[170px] flex flex-col items-center justify-center text-center px-4 py-6 text-slate-400 border border-dashed border-slate-200 rounded-lg">
-                    <p className="text-xs font-medium text-slate-500">No tasks in {quad.shortTitle}</p>
-                    <p className="text-xs text-slate-400 mt-0.5">Add a task above or drag one here</p>
+                  <div className="flex-1 min-h-[170px] flex flex-col items-center justify-center text-center px-4 py-6 text-zinc-400 border border-dashed border-zinc-200 rounded-xl">
+                    <p className="text-xs font-semibold text-zinc-600">No tasks in {quad.shortTitle}</p>
+                    <p className="text-xs text-zinc-400 mt-0.5">Add a task above or drag one here</p>
                   </div>
                 ) : (
-                  <div className="divide-y divide-slate-100">
+                  <div className="divide-y divide-zinc-100">
                     {qTasks.map((task) => {
                       const goalInfo = findGoalInfo(task.goalId);
                       const isDragging = draggedTaskId === task.id;
@@ -381,29 +381,29 @@ export function MatrixView({
                               type="button"
                               onClick={() => onToggleComplete(task.id)}
                               aria-label={task.completed ? 'Mark task incomplete' : 'Mark task complete'}
-                              className="min-w-[44px] min-h-[44px] -ml-2 -mt-2 flex items-center justify-center shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-900"
+                              className="min-w-[44px] min-h-[44px] -ml-2 -mt-2 flex items-center justify-center shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900"
                             >
                               <span
-                                className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
+                                className={`w-5 h-5 rounded-md border flex items-center justify-center transition-colors ${
                                   task.completed
-                                    ? 'bg-slate-900 border-slate-900 text-white'
-                                    : 'border-slate-300 bg-white group-hover:border-slate-500'
+                                    ? 'bg-zinc-900 border-zinc-900 text-white'
+                                    : 'border-zinc-300 bg-white group-hover:border-zinc-500'
                                 }`}
                               >
                                 {task.completed && <Check className="w-3.5 h-3.5" />}
                               </span>
                             </button>
 
-                            <div className="flex-1 min-w-0">
+                            <div className="flex-1 min-w-0 pt-0.5">
                               <p
-                                className={`text-sm font-medium leading-snug ${
-                                  task.completed ? 'line-through text-slate-400' : 'text-slate-900'
+                                className={`text-sm font-semibold leading-snug tracking-tight ${
+                                  task.completed ? 'line-through text-zinc-400 font-normal' : 'text-zinc-900'
                                 }`}
                               >
                                 {task.title}
                               </p>
                               {task.notes && (
-                                <p className="text-xs text-slate-500 mt-1 line-clamp-2 leading-relaxed">
+                                <p className="text-xs text-zinc-500 mt-1 line-clamp-2 leading-relaxed">
                                   {task.notes}
                                 </p>
                               )}
@@ -413,10 +413,10 @@ export function MatrixView({
                                   <button
                                     type="button"
                                     onClick={() => onJumpToGoal(goalInfo.id)}
-                                    className={`inline-flex items-center gap-1.5 text-xs font-medium transition-colors max-w-full hover:underline ${
+                                    className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md text-xs font-medium transition-colors max-w-full border ${
                                       goalInfo.type === 'long-term'
-                                        ? 'text-indigo-700 hover:text-indigo-900'
-                                        : 'text-emerald-700 hover:text-emerald-900'
+                                        ? 'bg-indigo-50/70 text-indigo-700 border-indigo-200/60 hover:bg-indigo-100/70'
+                                        : 'bg-emerald-50/70 text-emerald-800 border-emerald-200/60 hover:bg-emerald-100/70'
                                     }`}
                                     title="Open linked goal"
                                   >
@@ -432,7 +432,7 @@ export function MatrixView({
                             </div>
 
                             <div
-                              className="hidden sm:flex items-center text-slate-300 group-hover:text-slate-400 cursor-grab active:cursor-grabbing pt-0.5 shrink-0"
+                              className="hidden sm:flex items-center text-zinc-300 group-hover:text-zinc-400 cursor-grab active:cursor-grabbing pt-1 shrink-0"
                               title="Drag to move quadrant"
                             >
                               <GripVertical className="w-4 h-4" />
@@ -440,12 +440,12 @@ export function MatrixView({
                           </div>
 
                           {/* Task Actions Row */}
-                          <div className="mt-2 pl-7 flex items-center justify-between gap-2">
+                          <div className="mt-2.5 pl-7 flex items-center justify-between gap-2">
                             <select
                               aria-label="Move task to quadrant"
                               value={task.quadrant}
                               onChange={(e) => onMoveQuadrant(task.id, e.target.value as QuadrantId)}
-                              className="min-h-[40px] px-2.5 py-1 rounded-lg border border-slate-200 bg-slate-50 text-xs font-medium text-slate-600 focus:outline-none focus:ring-2 focus:ring-slate-900/15"
+                              className="min-h-[38px] px-2.5 py-1 rounded-lg border border-zinc-200 bg-zinc-50/70 text-xs font-medium text-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-900/10"
                             >
                               <option value="do">Move: Do First</option>
                               <option value="schedule">Move: Schedule</option>
@@ -458,7 +458,7 @@ export function MatrixView({
                                 type="button"
                                 onClick={() => onEditTask(task)}
                                 aria-label="Edit task"
-                                className="min-h-[40px] min-w-[40px] flex items-center justify-center rounded-lg text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-colors"
+                                className="min-h-[38px] min-w-[38px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors"
                               >
                                 <Pencil className="w-3.5 h-3.5" />
                               </button>
@@ -466,7 +466,7 @@ export function MatrixView({
                                 type="button"
                                 onClick={() => onDeleteTask(task.id)}
                                 aria-label="Delete task"
-                                className="min-h-[40px] min-w-[40px] flex items-center justify-center rounded-lg text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
+                                className="min-h-[38px] min-w-[38px] flex items-center justify-center rounded-lg text-zinc-400 hover:text-rose-600 hover:bg-rose-50 transition-colors"
                               >
                                 <Trash2 className="w-3.5 h-3.5" />
                               </button>

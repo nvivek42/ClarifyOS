@@ -66,17 +66,17 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-50 text-slate-900">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-[#FAFAFA] text-zinc-900">
       <div className="w-full max-w-sm space-y-6">
         {/* Brand header */}
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-slate-900 text-white flex items-center justify-center mx-auto shadow-sm">
-            {isFirstTimeSetup ? <KeyRound className="w-6 h-6" /> : <Lock className="w-6 h-6" />}
+          <div className="w-12 h-12 rounded-2xl bg-zinc-900 text-white flex items-center justify-center mx-auto shadow-sm">
+            {isFirstTimeSetup ? <KeyRound className="w-5 h-5 text-zinc-100" /> : <Lock className="w-5 h-5 text-zinc-100" />}
           </div>
-          <h1 className="text-xl font-bold tracking-tight text-slate-900">
+          <h1 className="text-xl font-bold tracking-tight text-zinc-900">
             {isFirstTimeSetup ? 'Setup ClarityOS Passcode' : 'Unlock ClarityOS'}
           </h1>
-          <p className="text-xs text-slate-500 leading-relaxed max-w-xs mx-auto">
+          <p className="text-xs text-zinc-500 leading-relaxed max-w-xs mx-auto">
             {isFirstTimeSetup
               ? 'Choose a username and master password to secure your personal productivity workspace.'
               : 'Enter your credentials to access your Eisenhower Matrix, Goals, and Second Brain.'}
@@ -84,12 +84,12 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
         </div>
 
         {/* Auth Card */}
-        <div className="bg-white rounded-xl border border-slate-200 p-6 shadow-xs space-y-4">
+        <div className="bg-white rounded-2xl border border-zinc-200/90 p-6 shadow-sm space-y-4">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label
                 htmlFor="auth-username"
-                className="block text-xs font-semibold text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-zinc-700 mb-1.5"
               >
                 Username
               </label>
@@ -101,14 +101,14 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 placeholder="e.g., vivek"
-                className="w-full min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+                className="w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
               />
             </div>
 
             <div>
               <label
                 htmlFor="auth-password"
-                className="block text-xs font-semibold text-slate-700 mb-1.5"
+                className="block text-xs font-semibold text-zinc-700 mb-1.5"
               >
                 Password
               </label>
@@ -121,13 +121,13 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full min-h-[44px] pl-3.5 pr-11 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+                  className="w-full min-h-[44px] pl-3.5 pr-11 py-2 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-0 top-0 h-full px-3 text-slate-400 hover:text-slate-700 transition-colors flex items-center justify-center"
+                  className="absolute right-0 top-0 h-full px-3 text-zinc-400 hover:text-zinc-700 transition-colors flex items-center justify-center"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -138,7 +138,7 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
               <div>
                 <label
                   htmlFor="auth-confirm-password"
-                  className="block text-xs font-semibold text-slate-700 mb-1.5"
+                  className="block text-xs font-semibold text-zinc-700 mb-1.5"
                 >
                   Confirm Password
                 </label>
@@ -150,13 +150,13 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-slate-900/15 focus:border-slate-400 transition-colors"
+                  className="w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white text-sm text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors"
                 />
               </div>
             )}
 
             {error && (
-              <div className="p-2.5 rounded-lg bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium">
+              <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 font-medium">
                 {error}
               </div>
             )}
@@ -164,7 +164,7 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full min-h-[44px] px-4 py-2 rounded-lg bg-slate-900 hover:bg-slate-800 disabled:opacity-50 text-white text-sm font-medium transition-colors flex items-center justify-center gap-2 shadow-xs whitespace-nowrap"
+              className="w-full min-h-[44px] px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 disabled:opacity-50 text-white text-sm font-semibold transition-colors flex items-center justify-center gap-2 shadow-xs whitespace-nowrap"
             >
               {isFirstTimeSetup ? (
                 <>
@@ -181,7 +181,7 @@ export function AuthLockScreen({ onAuthenticated }: AuthLockScreenProps) {
           </form>
         </div>
 
-        <p className="text-center text-[11px] text-slate-400">
+        <p className="text-center text-[11px] text-zinc-400">
           Protected with client-side SHA-256 cryptographic hashing.
         </p>
       </div>

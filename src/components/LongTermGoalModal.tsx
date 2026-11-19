@@ -198,7 +198,7 @@ export function LongTermGoalModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-slate-900/45 backdrop-blur-[2px] flex items-center justify-center p-2 sm:p-4"
+      className="fixed inset-0 z-50 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-2 sm:p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="lt-modal-heading"
@@ -206,18 +206,18 @@ export function LongTermGoalModal({
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="modal-enter bg-white rounded-xl border border-slate-200 shadow-2xl w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden">
+      <div className="modal-enter bg-white rounded-2xl border border-zinc-200/90 shadow-2xl w-full max-w-4xl max-h-[92vh] flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="px-6 py-4 border-b border-slate-200 flex items-center justify-between gap-4 shrink-0">
+        <div className="px-6 py-4 border-b border-zinc-100 flex items-center justify-between gap-4 shrink-0">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-9 h-9 rounded-lg bg-slate-900 text-white flex items-center justify-center shrink-0">
-              <Mountain className="w-4 h-4" />
+            <div className="w-10 h-10 rounded-xl bg-zinc-900 text-white flex items-center justify-center shrink-0">
+              <Mountain className="w-5 h-5" />
             </div>
             <div className="min-w-0">
-              <h3 id="lt-modal-heading" className="text-base font-semibold text-slate-900 truncate">
+              <h3 id="lt-modal-heading" className="text-base font-bold text-zinc-900 tracking-tight truncate">
                 Six Honest Serving Men Workspace
               </h3>
-              <p className="text-xs text-slate-500 truncate">
+              <p className="text-xs text-zinc-500 truncate">
                 Clarify all six prompts before locking in an irreversible commitment.
               </p>
             </div>
@@ -226,7 +226,7 @@ export function LongTermGoalModal({
             type="button"
             onClick={onClose}
             aria-label="Close workspace"
-            className="min-h-[44px] min-w-[44px] -mr-2 flex items-center justify-center rounded-lg text-slate-500 hover:text-slate-900 hover:bg-slate-100 transition-colors shrink-0"
+            className="min-h-[44px] min-w-[44px] -mr-2 flex items-center justify-center rounded-xl text-zinc-400 hover:text-zinc-900 hover:bg-zinc-100 transition-colors shrink-0"
           >
             <X className="w-5 h-5" />
           </button>
@@ -235,9 +235,9 @@ export function LongTermGoalModal({
         {/* Scrollable Body */}
         <form id="lt-goal-form" onSubmit={handleSaveDraft} className="flex-1 overflow-y-auto p-6 space-y-6">
           {/* Title & Clean Unboxed Status Bar */}
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b border-slate-200">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-5 border-b border-zinc-100">
             <div className="flex-1">
-              <label htmlFor="lt-title" className="block text-xs font-semibold text-slate-700 mb-1.5">
+              <label htmlFor="lt-title" className="block text-xs font-semibold text-zinc-700 mb-1.5">
                 Long-Term Goal Title
               </label>
               <input
@@ -248,17 +248,17 @@ export function LongTermGoalModal({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 placeholder="e.g., Launch Independent B2B SaaS to $10k MRR"
-                className={`w-full min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-500 ${
-                  isLockedOrAchieved ? 'bg-slate-50 text-slate-600' : 'bg-white text-slate-900'
+                className={`w-full min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors ${
+                  isLockedOrAchieved ? 'bg-zinc-50 text-zinc-600' : 'bg-zinc-50/50 focus:bg-white text-zinc-900'
                 }`}
               />
             </div>
 
             <div className="flex items-center gap-3 text-xs font-medium pb-2.5 shrink-0">
-              <span className={`font-mono tabular-nums font-semibold ${answeredCount === 6 ? 'text-emerald-700' : 'text-slate-600'}`}>
+              <span className={`font-mono tabular-nums font-semibold ${answeredCount === 6 ? 'text-emerald-700' : 'text-zinc-600'}`}>
                 {answeredCount}/6 Answered
               </span>
-              <span className="text-slate-300" aria-hidden="true">·</span>
+              <span className="text-zinc-300" aria-hidden="true">·</span>
               <span className={`font-semibold inline-flex items-center gap-1 ${statusMeta[status].className}`}>
                 {status === 'locked' && <Lock className="w-3.5 h-3.5" />}
                 {status === 'achieved' && <Award className="w-3.5 h-3.5" />}
@@ -272,8 +272,8 @@ export function LongTermGoalModal({
             {SERVING_MEN_FIELDS.map(({ key, label, prompt, placeholder }) => (
               <div key={key} className="space-y-1.5">
                 <label htmlFor={`lt-${key}`} className="flex items-baseline justify-between gap-2">
-                  <span className="text-sm font-semibold text-slate-900">{label}</span>
-                  <span className="text-xs text-slate-500 truncate">{prompt}</span>
+                  <span className="text-sm font-bold text-zinc-900 tracking-tight">{label}</span>
+                  <span className="text-xs text-zinc-500 truncate">{prompt}</span>
                 </label>
                 <textarea
                   id={`lt-${key}`}
@@ -282,8 +282,8 @@ export function LongTermGoalModal({
                   value={fields[key]}
                   onChange={(e) => setFields((prev) => ({ ...prev, [key]: e.target.value }))}
                   placeholder={placeholder}
-                  className={`w-full px-3.5 py-2.5 rounded-lg border border-slate-200 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-500 ${
-                    isLockedOrAchieved ? 'bg-slate-50 text-slate-600' : 'bg-white text-slate-900'
+                  className={`w-full px-3.5 py-2.5 rounded-xl border border-zinc-200 text-sm leading-relaxed focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400 transition-colors ${
+                    isLockedOrAchieved ? 'bg-zinc-50 text-zinc-600' : 'bg-zinc-50/50 focus:bg-white text-zinc-900'
                   }`}
                 />
               </div>
@@ -292,13 +292,13 @@ export function LongTermGoalModal({
 
           {/* Bridge to Eisenhower Matrix */}
           {activeGoalId && (
-            <div className="pt-5 border-t border-slate-200 space-y-3">
+            <div className="pt-5 border-t border-zinc-100 space-y-3">
               <div className="flex items-center justify-between gap-2">
-                <h4 className="text-xs font-semibold text-slate-900 flex items-center gap-1.5">
+                <h4 className="text-xs font-bold text-zinc-900 flex items-center gap-1.5 tracking-tight">
                   <ArrowRight className="w-4 h-4 text-indigo-600" />
                   <span>Break Down into Eisenhower Matrix Task</span>
                 </h4>
-                <span className="text-xs font-mono tabular-nums text-slate-500">
+                <span className="text-xs font-mono tabular-nums text-zinc-500">
                   {linkedTaskCount} linked {linkedTaskCount === 1 ? 'task' : 'tasks'}
                 </span>
               </div>
@@ -315,13 +315,13 @@ export function LongTermGoalModal({
                     }
                   }}
                   placeholder="Next concrete tactical step for this goal..."
-                  className="flex-1 min-h-[44px] px-3.5 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-600/20 focus:border-indigo-500"
+                  className="flex-1 min-h-[44px] px-3.5 py-2 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white text-sm text-zinc-900 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-400"
                 />
                 <select
                   aria-label="Target quadrant for new task"
                   value={newTaskQuadrant}
                   onChange={(e) => setNewTaskQuadrant(e.target.value as QuadrantId)}
-                  className="min-h-[44px] px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-600/20"
+                  className="min-h-[44px] px-3 py-2 rounded-xl border border-zinc-200 bg-zinc-50/50 focus:bg-white text-sm text-zinc-800 focus:outline-none focus:ring-2 focus:ring-zinc-900/10"
                 >
                   <option value="do">1. Do First</option>
                   <option value="schedule">2. Schedule</option>
@@ -331,7 +331,7 @@ export function LongTermGoalModal({
                 <button
                   type="button"
                   onClick={handleSpawn}
-                  className="min-h-[44px] px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium transition-colors whitespace-nowrap shrink-0"
+                  className="min-h-[44px] px-4 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 text-white text-sm font-semibold transition-colors whitespace-nowrap shrink-0 shadow-xs"
                 >
                   Add to Matrix
                 </button>
@@ -341,13 +341,13 @@ export function LongTermGoalModal({
         </form>
 
         {/* Footer */}
-        <div className="px-6 py-4 border-t border-slate-200 bg-slate-50/70 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+        <div className="px-6 py-4 border-t border-zinc-100 bg-zinc-50/70 flex flex-wrap items-center justify-between gap-2.5 shrink-0">
           <div className="flex items-center gap-2">
             {activeGoalId && (
               <button
                 type="button"
                 onClick={() => onDelete(activeGoalId)}
-                className="min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-rose-600 hover:bg-rose-50 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                className="min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-semibold text-rose-600 hover:bg-rose-50 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
               >
                 <Trash2 className="w-4 h-4" />
                 <span>Delete</span>
@@ -357,7 +357,7 @@ export function LongTermGoalModal({
               <button
                 type="button"
                 onClick={() => handleStatusChange('draft')}
-                className="min-h-[44px] px-3.5 py-2 rounded-lg text-sm font-medium text-slate-700 bg-white border border-slate-200 hover:bg-slate-100 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                className="min-h-[44px] px-3.5 py-2 rounded-xl text-sm font-semibold text-zinc-700 bg-white border border-zinc-200 hover:bg-zinc-100 transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
               >
                 <Unlock className="w-4 h-4" />
                 <span>Unlock to Edit</span>
@@ -369,7 +369,7 @@ export function LongTermGoalModal({
             <button
               type="button"
               onClick={onClose}
-              className="min-h-[44px] px-4 py-2 rounded-lg text-sm font-medium text-slate-600 hover:bg-slate-200/60 transition-colors whitespace-nowrap shrink-0"
+              className="min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold text-zinc-600 hover:bg-zinc-100 transition-colors whitespace-nowrap shrink-0"
             >
               Close
             </button>
@@ -378,14 +378,14 @@ export function LongTermGoalModal({
                 <button
                   type="submit"
                   form="lt-goal-form"
-                  className="min-h-[44px] px-4 py-2 rounded-lg text-sm font-medium bg-white border border-slate-300 text-slate-800 hover:bg-slate-100 transition-colors whitespace-nowrap shrink-0"
+                  className="min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold bg-white border border-zinc-300 text-zinc-800 hover:bg-zinc-50 transition-colors whitespace-nowrap shrink-0"
                 >
                   Save Draft
                 </button>
                 <button
                   type="button"
                   onClick={handleLockIn}
-                  className="min-h-[44px] px-4 py-2 rounded-lg text-sm font-medium bg-indigo-600 hover:bg-indigo-700 text-white transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                  className="min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold bg-zinc-900 hover:bg-zinc-800 text-white transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 shadow-xs"
                 >
                   <Lock className="w-4 h-4" />
                   <span>Lock In Goal</span>
@@ -396,7 +396,7 @@ export function LongTermGoalModal({
               <button
                 type="button"
                 onClick={() => handleStatusChange('achieved')}
-                className="min-h-[44px] px-4 py-2 rounded-lg text-sm font-medium bg-emerald-600 hover:bg-emerald-700 text-white transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0"
+                className="min-h-[44px] px-4 py-2 rounded-xl text-sm font-semibold bg-emerald-700 hover:bg-emerald-800 text-white transition-colors inline-flex items-center gap-1.5 whitespace-nowrap shrink-0 shadow-xs"
               >
                 <Award className="w-4 h-4" />
                 <span>Mark Achieved</span>
